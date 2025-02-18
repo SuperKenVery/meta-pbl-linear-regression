@@ -1,0 +1,16 @@
+[project]
+authors = ["ken <1610057945@qq.com>"]
+channels = ["conda-forge"]
+description = "Add a short description here"
+name = "Regression"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+statsmodels = ">=0.14.4,<0.15"
+pandas = ">=2.2.3,<3"
+ipykernel = ">=6.29.5,<7"
+matplotlib = ">=3.10.0,<4"
+seaborn = ">=0.13.2,<0.14"
