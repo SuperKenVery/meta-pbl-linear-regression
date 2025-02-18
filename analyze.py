@@ -39,3 +39,7 @@ def show_results(x_key: str, y_key: str):
     print(model.summary())
 
 show_results(Y_key[1], Z_key)
+show_results(Y_key[0], Z_key)
+# %%
+show_results(X_key, Y_key[0])
+show_results(X_key, Y_key[1])
