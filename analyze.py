@@ -11,6 +11,7 @@
 import pandas as pd
 import statsmodels.api as sm
 import seaborn as sns
+from matplotlib import pyplot as plt
 from typing import List, Union
 
 data = pd.read_csv('data.csv')
@@ -30,16 +31,24 @@ def analyze(x_key: str, y_key: str):
     result = sm.OLS(y, x).fit()
     return result
 
-def plot(x_key: str, y_key: str):
-    sns.regplot(data=data, x=x_key, y=y_key)
+def plot(x_key: str, y_key: str, ax=None, label=None):
+    sns.regplot(data=data, x=x_key, y=y_key, ax=ax, label=label)
 
-def show_results(x_key: str, y_key: str):
+def show_results(x_key: str, y_key: str, ax=None, label=None):
     model = analyze(x_key, y_key)
-    plot(x_key, y_key)
-    print(model.summary())
+    plot(x_key, y_key, ax, label)
+    # print(model.summary())
 
-show_results(Y_key[1], Z_key)
-show_results(Y_key[0], Z_key)
+fig, ax = plt.subplots(1, 1)
+show_results(Y_key[0], Z_key, ax, label=Y_key[0])
+show_results(Y_key[1], Z_key, ax, label=Y_key[1])
+ax.set_xlabel(" and ".join(Y_key))
+ax.legend()
+fig.savefig("y_to_z.png")
 # %%
-show_results(X_key, Y_key[0])
-show_results(X_key, Y_key[1])
+fig, ax = plt.subplots(1, 1)
+show_results(X_key, Y_key[0], ax, Y_key[0])
+show_results(X_key, Y_key[1], ax, Y_key[1])
+ax.legend()
+ax.set_ylabel(" and ".join(Y_key))
+fig.savefig("x_to_y.png")
